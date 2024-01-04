@@ -2679,7 +2679,7 @@
             function updateFIXSCALE() {
                 let game = document.querySelector(".interstitial-wrapper")
                 let scale
-                if (window.innerWidth*2/3 < window.innerHeight) {
+                if (window.innerWidth*3/2 < window.innerHeight) {
                     scale = Math.min(window.innerHeight - 200) / game.offsetWidth
                     game.style.scale = scale
                     game.style.rotate = '90deg'
