@@ -1,19 +1,21 @@
 <html>
-
+<!-- SỬA DÒNG 446 -->
 <head>
     <title>T-Rex Game</title>
+    <meta name="viewport" content="user-scalable=0">
+    <link rel="shortcut icon" href="https://static.wikia.nocookie.net/fridaynightfunking/images/d/d4/Dino_idle.png" type="image/x-icon">
     <meta name="description" content="Ripped T-Rex/Dino game of Chromium">
-    <meta property="og:title" content="Play the hidden T-Rex Dinosaur game of Chromium .">
+    <meta property="og:title" content="Chơi game khủng long mất mạng .">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://www.thecodepost.org">
+    <meta property="og:url" content="https://www.facebook.com/CLBLapTrinhTrenThietBiDiDong">
     <meta property="og:image" content="http://img.thecodepost.org/2015/01/trex.png">
-    <meta property="og:site_name" content="The Code Post">
+    <meta property="og:site_name" content="T-Rex game">
     <meta property="og:description"
-        content="Google Chrome has a hidden T-Rex game only for offline mode. But now, you can enjoy it any time and on any device, but you gotta stay online!!!">
+        content="Game T-Rex từ trình duyệt chrome và xuất hiện khi cá mập cắn cáp. Nhưng giờ bạn có thể chơi khi nó online!!!">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@thecodepost">
-    <meta name="twitter:creator" content="@thecodepost">
+    <meta name="twitter:site" content="@OUMPC">
+    <meta name="twitter:creator" content="@OUMPC">
     <meta name="twitter:title" content="Check out the cool hidden game from Google Chrome!">
     <meta name="twitter:description" content="Check out the cool hidden game from Google Chrome!">
     <meta name="twitter:image:src" content="http://img.thecodepost.org/2015/01/trex.png">
@@ -349,6 +351,7 @@
                             this.containerEl.style.width = this.dimensions.WIDTH + 'px';
                             this.containerEl.style.height = this.dimensions.HEIGHT + 'px';
                             this.distanceMeter.update(0, Math.ceil(this.distanceRan));
+                            
                             this.stop();
                         } else {
                             this.tRex.draw(0, 0);
@@ -439,6 +442,11 @@
                             checkForCollision(this.horizon.obstacles[0], this.tRex);
                         if (!collision) {
                             this.distanceRan += this.currentSpeed * deltaTime / this.msPerFrame;
+                            
+                            //UPDATE SCORE
+                            updateScoreFIX(this.distanceMeter.getActualDistance(this.distanceRan))
+
+
                             if (this.currentSpeed < this.config.MAX_SPEED) {
                                 this.currentSpeed += this.config.ACCELERATION;
                             }
@@ -2200,6 +2208,10 @@
             .small-link {
                 font-size: 1em;
             }
+
+            *{
+                user-select: none;
+            }
         }
     </style>
     <style>
@@ -2568,7 +2580,7 @@
         <div class="onlyforchrome" style="font-size: 30px;text-align: center;font-family: Helvetica; user-select: none;">Running T-Rex
         </div>
         <div class="onlyforchrome"
-            style="margin-top:5px;text-align:center;color:#8a8a8a;margin-bottom:80px; font-size:.8em;line-height:1.2em;font-family: Georgia;user-select: none;">
+            style="margin-top:5px;text-align:center;color:#8a8a8a;margin-bottom:40px; font-size:.8em;line-height:1.2em;font-family: Georgia;user-select: none;">
             <strong>T-Rex Dino game</strong> from Google Chrome offline mode made by <a
                 href="https://www.facebook.com/CLBLapTrinhTrenThietBiDiDong"
                 target="_blank"><strong>@MPC</strong></a>.<br /> Press "Space" to jump your Dino and start the game.
@@ -2632,6 +2644,8 @@
             </template>
         </div>
 
+
+
         <script type="text/javascript">
             new Runner('.interstitial-wrapper');
         </script>
@@ -2643,6 +2657,53 @@
                 hideClass(".onlyforchrome");
             }
         </script>
+
+        <!-- <div class="progress">
+            <div class="p"></div>
+        </div> -->
+
+        <style>
+            #t{
+                display: flex;
+                align-items: center;
+            }
+
+            .progress{
+                border: 2px solid #535353;
+                margin: 10px;
+                height: 5px;
+            }
+        </style>
+
+        <script>
+            function updateFIXSCALE() {
+                let game = document.querySelector(".interstitial-wrapper")
+                let scale
+                if (window.innerWidth*2/3 < window.innerHeight) {
+                    scale = Math.min(window.innerHeight - 200) / game.offsetWidth
+                    game.style.scale = scale
+                    game.style.rotate = '90deg'
+                }else{
+                    scale = Math.min(window.innerWidth - 100, 1000) / game.offsetWidth
+                    game.style.scale = scale
+                    game.style.rotate = '0'
+                }
+            }
+
+            updateFIXSCALE()
+
+            window.addEventListener('orientationchange',updateFIXSCALE())
+            window.addEventListener('resize',updateFIXSCALE())
+
+
+            function updateScoreFIX(score) {
+                // console.log(score)
+            }
+            // console.log(window.innerWidth + " | "+ window.innerHeight)
+            
+        </script>
+
+        
 
 
 
